@@ -6,7 +6,7 @@ from src.models.model_client import (
     ModelNotFoundError,
 )
 from src.schemas.responses import UserRequest, AIResponse
-
+from src.capabilities.retriever import load_rules, retrieve_relevant_rule
 
 class AIService:
     """
@@ -32,7 +32,7 @@ class AIService:
         # 1. Validate empty input
         if not user_message or not user_message.strip():
             return AIResponse(
-                content="Please enter a message before sending.",
+                content="Please enter an item to recycle before sending.",
                 success=False,
                 error_message="User message was empty.",
             )
@@ -41,9 +41,27 @@ class AIService:
             # 2. Schema validation
             request = UserRequest(message=user_message.strip())
 
-            # 3. Call model client
+            # 3. RAG PIPELINE: Retrieve and Construct Prompt
+            rules = load_rules()
+            relevant_rule = retrieve_relevant_rule(request.message, rules)
+            
+            if relevant_rule:
+                context = f"Category: {relevant_rule['category']}\nRules: {relevant_rule['description']} {relevant_rule['condition']}"
+            else:
+                context = "No specific local rule found. Advise the user to check their local municipality guidelines or throw it in Mixed Waste."
+                
+            prompt = f"""You are SortSmart, an AI recycling guide. 
+Use ONLY the following local rules to advise the user on where to dispose of their item.
+If the rule has a condition (e.g., "must be clean"), remind the user or ask a clarifying question.
+Keep your answer under 3 sentences and be direct.
+
+Context: {context}
+User Item: {request.message}
+Answer:"""
+
+            # 4. Call model client
             client = self._get_client()
-            response_text = client.generate(request.message)
+            response_text = client.generate(prompt)
 
             return AIResponse(
                 content=response_text,
@@ -83,7 +101,6 @@ class AIService:
                 success=False,
                 error_message=str(err),
             )
-
 
 def generate_response(user_message: str, service: Optional[AIService] = None) -> str:
     """
