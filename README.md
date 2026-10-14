@@ -1,140 +1,36 @@
-# Project name
+SortSmart: An AI Recycling Guide
+Group Members:
+Suranjila Jayawardana, Madhuni Kanchana
 
-Starter template for the **Development of AI Applications** course final group project.
+Intended Users and Problem:
+The intended users are students, households, and residents who are new to their local recycling system. People often struggle to decide where an item should be disposed of, especially when packaging contains multiple materials (e.g., "dirty pizza box" or "yogurt cup with a foil lid"). General knowledge often conflicts with specific local municipal sorting instructions, leading to recycling contamination.
 
-## Team members
+Why AI is Needed:
+Standard keyword searches fail when users describe items using synonyms, colloquialisms, or complex conditions (e.g., specifying that a container is still dirty). A Large Language Model (LLM) can understand the natural language context of the user's messy description, identify the core materials, and evaluate them against specific rule conditions.
 
-- Member 1 Name (email@example.com)
-- Member 2 Name (email@example.com)
-- Member 3 Name (email@example.com)
+Proposed Solution and Main Workflow:
+SortSmart is a web application that helps users identify the correct waste category for a described item based strictly on a provided set of local sorting rules.
 
-## Problem
+The user types an item description into the interface (e.g., "empty plastic yoghurt cup with the foil lid attached").
 
-### Intended users
-Who are the primary target users of this application?
+The application retrieves the relevant local sorting guidelines from its knowledge base.
 
-### Problem statement
-What specific problem does this application solve for those users?
+The AI model analyzes the user's item against the retrieved rules.
 
-### Why AI is appropriate
-Why does this problem require AI / LLM capabilities rather than traditional deterministic software?
+The application outputs the suggested waste category, a brief explanation citing the rule, and handles uncertain cases by asking for clarification (e.g., "Is the plastic cup rinsed?").
 
-## Solution
+Initial Architecture:
+The application strictly separates the UI from the AI logic, built upon the course's starter template.
 
-Briefly describe your application, its primary value proposition, and how it addresses the problem statement above.
+User Interface: Gradio web interface for input and displaying categorized results.
 
-## Main user workflow
+Application Logic: Python backend handling the RAG pipeline (document chunking and retrieval) and prompt formatting.
 
-1. **User Input:** The user submits a prompt or query via the Gradio user interface.
-2. **Processing & Guardrails:** The application service layer (`src/services/ai_service.py`) validates and formats the request.
-3. **Model Response:** The model client calls Ollama locally and returns the response back through the service layer to the UI.
+AI Integration: Local Ollama service handling the LLM generation based on the retrieved context.
 
-## Architecture
+Planned Additional AI Capability and Justification:
+Retrieval-Augmented Generation (RAG).
+LLMs are prone to hallucinating waste management rules or providing generic advice that violates local municipal guidelines. RAG is essential for this problem because it forces the model to ground its answers in a specific, provided dataset of local sorting rules. If a rule is not in the retrieval context, the model will be instructed to admit it does not know, ensuring high reliability and preventing authoritative but incorrect guidance.
 
-Below is the initial starter architecture. As your project evolves with additional capabilities, replace or extend this diagram in [`docs/architecture.md`](docs/architecture.md).
-
-```text
-User
-  ↓
-Gradio UI (app/ui.py)
-  ↓
-Application / AI Service (src/services/ai_service.py)
-  ↓
-Model Client (src/models/model_client.py)
-  ↓
-Ollama (Local LLM Server)
-```
-
-> **Core Architectural Rule:** The user interface must NEVER communicate directly with the model client or Ollama. All interactions must pass through the service layer (`ai_service.py`).
-
-## Model
-
-- **Model used:** e.g., `llama3.2` (or specified local Ollama model)
-- **Selection rationale:** Why was this specific model chosen for your project (e.g., lightweight, performance, context size)?
-
-## Additional AI capability
-
-Select at least one additional capability to implement for your final project:
-
-- [ ] RAG (Retrieval-Augmented Generation)
-- [ ] Tools / External API integration
-- [ ] Model Context Protocol (MCP)
-- [ ] Agentic workflow (Model-selected actions based on observations)
-- [ ] Memory / Persistent state
-- [ ] Multimodal interaction (Text + Images)
-- [ ] Other: ______________________
-
-### Capability justification
-Explain why the selected capability is useful and necessary for your application's user problem.
-
-## Setup
-
-### 1. Create the Conda environment
-
-```bash
-conda env create -f environment.yml
-```
-
-### 2. Activate the environment
-
-```bash
-conda activate dev-ai-project
-```
-
-### 3. Configure environment variables
-
-Copy `.env.example` to create your local `.env` configuration file:
-
-On Linux / macOS:
-```bash
-cp .env.example .env
-```
-
-On Windows (Command Prompt / PowerShell):
-```powershell
-copy .env.example .env
-```
-
-Ensure `.env` contains valid values for `OLLAMA_BASE_URL` and `MODEL_NAME`:
-```env
-OLLAMA_BASE_URL=http://localhost:11434
-MODEL_NAME=llama3.2
-```
-
-### 4. Start Ollama
-
-Make sure Ollama is installed and running locally, then pull your configured model:
-
-```bash
-ollama run llama3.2
-```
-
-### 5. Run the application
-
-Run the application from the root directory of the project:
-
-```bash
-python -m app.main
-```
-
-Then open your browser at `http://localhost:7860`.
-
-### 6. Run automated tests
-
-```bash
-pytest
-```
-
-## Evaluation
-
-Describe your evaluation methodology and summarize key results. Starter test cases can be found in [`evaluation/test_cases.json`](evaluation/test_cases.json).
-
-Refer to [`evaluation/README.md`](evaluation/README.md) for guidelines on defining success, edge cases, and failure scenarios.
-
-## Known limitations
-
-- Highlight known system limitations, unhandled edge cases, or boundaries of current capabilities.
-
-## Future improvements
-
-- List planned feature enhancements, architectural refactorings, or future capabilities.
+Planned Model and Runtime:
+The application will use a lightweight local LLM (such as llama3.2 or mistral) running via Ollama. This ensures reproducible execution without relying on paid external APIs, fulfilling the course's reproducibility and secrecy requirements.
