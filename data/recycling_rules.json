@@ -1,0 +1,27 @@
+[
+  {
+    "category": "Paper",
+    "description": "Clean and dry paper, newspapers, magazines, and mail.",
+    "condition": "Must be dry. No food contamination."
+  },
+  {
+    "category": "Cardboard",
+    "description": "Corrugated cardboard, egg cartons, and clean pizza boxes.",
+    "condition": "Must be flattened. If a pizza box is heavily soiled with grease, the greasy part goes to Mixed Waste."
+  },
+  {
+    "category": "Plastic Packaging",
+    "description": "Empty plastic food containers, yogurt cups, and plastic wrappers.",
+    "condition": "Must be empty and rinsed. Lids should be detached."
+  },
+  {
+    "category": "Biowaste",
+    "description": "Food scraps, fruit peels, coffee grounds, and tea bags.",
+    "condition": "No liquids or cooking oil."
+  },
+  {
+    "category": "Mixed Waste",
+    "description": "Dirty packaging, broken ceramics, diapers, and heavily soiled paper.",
+    "condition": "Default category if an item cannot be cleaned or recycled."
+  }
+]
