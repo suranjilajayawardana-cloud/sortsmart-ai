@@ -4,7 +4,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 def load_rules(filepath="data/recycling_rules.json"):
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # Navigate up from src/capabilities -> src -> root directory
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
     full_path = os.path.join(base_dir, filepath)
     
     with open(full_path, 'r') as f:

@@ -97,7 +97,7 @@ Answer:"""
 
         except Exception as err:
             return AIResponse(
-                content="[Error] An unexpected application error occurred.",
+                content=f"[Error] An unexpected application error occurred: {str(err)}",
                 success=False,
                 error_message=str(err),
             )
