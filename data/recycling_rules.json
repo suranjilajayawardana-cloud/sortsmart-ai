@@ -1,27 +1,58 @@
 [
   {
-    "category": "Paper",
-    "description": "Clean and dry paper, newspapers, magazines, and mail.",
-    "condition": "Must be dry. No food contamination."
-  },
-  {
-    "category": "Cardboard",
-    "description": "Corrugated cardboard, egg cartons, and clean pizza boxes.",
-    "condition": "Must be flattened. If a pizza box is heavily soiled with grease, the greasy part goes to Mixed Waste."
-  },
-  {
     "category": "Plastic Packaging",
-    "description": "Empty plastic food containers, yogurt cups, and plastic wrappers.",
-    "condition": "Must be empty and rinsed. Lids should be detached."
+    "examples": "plastic water bottle, soda bottle, yoghurt cup, yogurt cup, shampoo bottle, plastic food container, detergent bottle, plastic wrapper, plastic bag, ketchup bottle",
+    "description": "Empty plastic bottles, food tubs, pots, and packaging films.",
+    "condition": "Must be empty and lightly rinsed if dirty. Remove caps and lids and place them into plastic collection separately. Note: Deposit bottles (PALPA) should be returned to store reverse vending machines.",
+    "source": "Municipal Waste Management Guidelines (HSY / Kiertokaari, 2026)"
+  },
+  {
+    "category": "Cardboard and Carton",
+    "examples": "cardboard box, milk carton, juice carton, cereal box, paper bag, egg carton, toilet paper roll, pizza box, corrugated cardboard",
+    "description": "Clean and dry cardboard, paperboard, and beverage cartons.",
+    "condition": "Must be emptied, rinsed if needed, dried, and flattened. If a pizza box is heavily soaked with grease or food stuck to it, tear off the greasy part and put it in Mixed Waste.",
+    "source": "Municipal Waste Management Guidelines (HSY / Kiertokaari, 2026)"
+  },
+  {
+    "category": "Paper",
+    "examples": "newspaper, magazine, office paper, printer paper, envelope, advertisement, brochure, notebook paper",
+    "description": "Clean and dry reading and writing paper.",
+    "condition": "Must be clean and dry. Wet, greasy, or dirty paper (like used paper towels or tissues) cannot be recycled as paper.",
+    "source": "Municipal Waste Management Guidelines (HSY / Kiertokaari, 2026)"
   },
   {
     "category": "Biowaste",
-    "description": "Food scraps, fruit peels, coffee grounds, and tea bags.",
-    "condition": "No liquids or cooking oil."
+    "examples": "used paper towel, kitchen towel, napkin, tissue, food scraps, banana peel, fruit peel, vegetable peelings, coffee grounds, tea bag, eggshells, spoiled food",
+    "description": "Compostable organic food waste and soiled kitchen paper.",
+    "condition": "Drain liquids before disposal. Pack in a biodegradable bag or newspaper. Used paper towels and napkins belong here unless contaminated with chemicals.",
+    "source": "Municipal Waste Management Guidelines (HSY / Kiertokaari, 2026)"
+  },
+  {
+    "category": "Glass Packaging",
+    "examples": "glass jar, jam jar, pickle jar, sauce bottle, glass bottle, baby food jar",
+    "description": "Clear and colored glass bottles and jars used for food or beverages.",
+    "condition": "Must be empty and rinsed. Remove metal lids (put in Metal) and plastic caps (put in Plastic). Do NOT put drinking glasses, mirrors, window glass, or ceramics here (those go to Mixed Waste).",
+    "source": "Municipal Waste Management Guidelines (HSY / Kiertokaari, 2026)"
+  },
+  {
+    "category": "Metal",
+    "examples": "tin can, aluminum can, soda can, metal lid, crown cap, aluminum foil, foil lid, empty paint can, metal cutlery, pot, pan",
+    "description": "Small household metal items and metal packaging.",
+    "condition": "Packaging must be empty and rinsed. Foil lids from yogurt cups belong in Metal once detached.",
+    "source": "Municipal Waste Management Guidelines (HSY / Kiertokaari, 2026)"
+  },
+  {
+    "category": "Hazardous Waste & Separate Collection Point",
+    "examples": "battery, AA battery, car battery, light bulb, LED bulb, fluorescent tube, electronics, phone charger, broken kettle, medicine, paint, chemicals",
+    "description": "Items containing hazardous substances or electronics (WEEE) that require a dedicated collection point.",
+    "condition": "NEVER place in Mixed Waste or regular bins. Tape the terminals of batteries and return them to grocery store battery collection boxes or a municipal Sortti / hazardous waste station.",
+    "source": "Municipal Waste Management Guidelines (HSY / Kiertokaari, 2026)"
   },
   {
     "category": "Mixed Waste",
-    "description": "Dirty packaging, broken ceramics, diapers, and heavily soiled paper.",
-    "condition": "Default category if an item cannot be cleaned or recycled."
+    "examples": "dirty plastic, greasy wrapper, chip bag, broken ceramic mug, drinking glass, mirror, diaper, hygiene product, vacuum cleaner bag, cigarette butt, chewing gum",
+    "description": "Non-recyclable household waste and heavily soiled packaging that cannot be cleaned reasonably.",
+    "condition": "Use only when the item cannot be sorted into Biowaste, Plastic, Cardboard, Paper, Glass, Metal, or Hazardous Waste.",
+    "source": "Municipal Waste Management Guidelines (HSY / Kiertokaari, 2026)"
   }
 ]
