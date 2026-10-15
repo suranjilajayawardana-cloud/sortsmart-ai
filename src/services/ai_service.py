@@ -6,16 +6,17 @@ from src.models.model_client import (
     ModelNotFoundError,
 )
 from src.schemas.responses import UserRequest, AIResponse
-from src.capabilities.retriever import load_rules, retrieve_relevant_rule
+from src.capabilities.rag import build_rag_prompt
+
 
 class AIService:
     """
     Application service layer responsible for validating user input,
-    orchestrating model client requests, and catching exceptions gracefully.
+    orchestrating RAG context retrieval and model client requests,
+    and catching exceptions gracefully.
     """
 
     def __init__(self, model_client: Optional[OllamaModelClient] = None):
-        # Allow injecting custom/mock model_client for simple testing
         self.model_client = model_client
 
     def _get_client(self) -> OllamaModelClient:
@@ -26,42 +27,24 @@ class AIService:
 
     def process_message(self, user_message: str) -> AIResponse:
         """
-        Processes a raw user message string and returns a structured AIResponse.
-        Catches technical failures and converts them to friendly user-facing messages.
+        Processes a raw user message string using the RAG pipeline
+        and returns a structured AIResponse.
         """
-        # 1. Validate empty input
         if not user_message or not user_message.strip():
             return AIResponse(
-                content="Please enter an item to recycle before sending.",
+                content="Please enter a waste item description before sending.",
                 success=False,
                 error_message="User message was empty.",
             )
 
         try:
-            # 2. Schema validation
             request = UserRequest(message=user_message.strip())
 
-            # 3. RAG PIPELINE: Retrieve and Construct Prompt
-            rules = load_rules()
-            relevant_rule = retrieve_relevant_rule(request.message, rules)
-            
-            if relevant_rule:
-                context = f"Category: {relevant_rule['category']}\nRules: {relevant_rule['description']} {relevant_rule['condition']}"
-            else:
-                context = "No specific local rule found. Advise the user to check their local municipality guidelines or throw it in Mixed Waste."
-                
-            prompt = f"""You are SortSmart, an AI recycling guide. 
-Use ONLY the following local rules to advise the user on where to dispose of their item.
-If the rule has a condition (e.g., "must be clean"), remind the user or ask a clarifying question.
-Keep your answer under 3 sentences and be direct.
+            # Construct RAG-grounded prompt
+            grounded_prompt = build_rag_prompt(request.message)
 
-Context: {context}
-User Item: {request.message}
-Answer:"""
-
-            # 4. Call model client
             client = self._get_client()
-            response_text = client.generate(prompt)
+            response_text = client.generate(grounded_prompt)
 
             return AIResponse(
                 content=response_text,
@@ -81,8 +64,8 @@ Answer:"""
         except ModelNotFoundError as err:
             return AIResponse(
                 content=(
-                    f"[Error] The configured AI model is unavailable in Ollama.\n\n"
-                    f"Please verify your MODEL_NAME setting or run 'ollama run <model_name>'."
+                    "[Error] The configured AI model is unavailable in Ollama.\n\n"
+                    "Please verify your MODEL_NAME setting or run 'ollama run <model_name>'."
                 ),
                 success=False,
                 error_message=str(err),
@@ -102,12 +85,10 @@ Answer:"""
                 error_message=str(err),
             )
 
+
 def generate_response(user_message: str, service: Optional[AIService] = None) -> str:
     """
     Main reusable service entry point used by the UI layer.
-    
-    Accepts user input message, passes it to the AI service, and returns
-    the generated text response (or a friendly error message).
     """
     active_service = service or AIService()
     response = active_service.process_message(user_message)

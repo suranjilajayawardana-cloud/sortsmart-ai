@@ -4,38 +4,36 @@ from src.services.ai_service import generate_response
 
 def build_ui() -> gr.Blocks:
     """
-    Constructs the Gradio web interface.
-    
+    Constructs the Gradio web interface for SortSmart.
+
     Architectural Principle: The UI communicates strictly with `generate_response()`
     in the AI service layer and never directly with Ollama or the model client.
     """
-    with gr.Blocks(title="AI Application Starter") as demo:
+    with gr.Blocks(title="SortSmart: AI Recycling Guide") as demo:
         gr.Markdown(
             """
-            # AI Application Starter
-            
-            Welcome to the AI Application Starter repository.
-            Type a prompt below to interact with your local AI service.
+            # ♻️ SortSmart: An AI Recycling Guide
+            Describe a household item you want to dispose of (e.g., *"empty plastic yoghurt cup with foil lid"*, *"greasy pizza box"*, or *"used paper towel"*).
+            SortSmart retrieves documented sorting rules and explains which waste category to use.
             """
         )
 
         with gr.Row():
-            user_input = gr.Textbox(
-                lines=3,
-                placeholder="Type your message here...",
-                label="User Prompt",
-            )
+            with gr.Column():
+                user_input = gr.Textbox(
+                    lines=3,
+                    placeholder="e.g., empty plastic yoghurt cup, greasy pizza box, dead AA battery...",
+                    label="What item do you want to dispose of?",
+                )
+                submit_btn = gr.Button("Find Waste Category", variant="primary")
 
-        submit_btn = gr.Button("Send", variant="primary")
+            with gr.Column():
+                output_box = gr.Textbox(
+                    lines=8,
+                    label="Sorting Guidance & Rule Source",
+                    interactive=False,
+                )
 
-        with gr.Row():
-            output_box = gr.Textbox(
-                lines=8,
-                label="AI Response",
-                interactive=False,
-            )
-
-        # Connect UI actions exclusively to the service layer function
         submit_btn.click(
             fn=generate_response,
             inputs=user_input,
