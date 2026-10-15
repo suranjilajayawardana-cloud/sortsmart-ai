@@ -1,32 +1,30 @@
 # Evaluation Results Summary
 
-Document your team's evaluation results below.
-
 ## Summary Overview
-
-- **Date of Evaluation:** YYYY-MM-DD
-- **Model Evaluated:** (e.g., `llama3.2`)
-- **Total Test Cases Executed:** 0
-- **Passed:** 0
+- **Date of Evaluation:** 2026-10-15
+- **Model Evaluated:** `llama3.2`
+- **Total Test Cases Executed:** 3
+- **Passed:** 3
 - **Failed:** 0
-- **Pass Rate:** 0%
+- **Pass Rate:** 100%
 
 ## Performance by Category
 
 | Category | Total Cases | Passed | Failed | Pass Rate |
 | :--- | :---: | :---: | :---: | :---: |
-| Successful Cases | 0 | 0 | 0 | 0% |
-| Difficult Cases | 0 | 0 | 0 | 0% |
-| Failure / Edge Cases | 0 | 0 | 0 | 0% |
+| Successful Cases | 1 | 1 | 0 | 100% |
+| Difficult Cases | 1 | 1 | 0 | 100% |
+| Failure / Edge Cases | 1 | 1 | 0 | 100% |
 
 ## Key Findings & Failure Analysis
 
 ### What worked well
-- Observation 1
-- Observation 2
+- The TF-IDF RAG pipeline successfully matched colloquial item descriptions (like "greasy pizza box") to their formal municipal categories.
+- The prompt engineering successfully forced the model to apply specific rule conditions (like rinsing or detaching lids) rather than just stating the category.
 
-### Observed failure modes
-- Description of case where the system failed and why.
+### Observed limitations
+- While our failure case safely defaulted to the "Mixed Waste" fallback, handling dangerous items (like a car battery) by defaulting to Mixed Waste is a real-world limitation. A future iteration requires a dedicated Hazardous Materials rule set to prevent dangerous disposal advice.
 
 ## Action Items & Improvements
-- [ ] Planned fix or enhancement based on evaluation findings.
+- [ ] Expand the JSON knowledge base to include a comprehensive hazardous materials index.
+- [ ] Upgrade the retrieval system from TF-IDF to dense vector embeddings (e.g., ChromaDB) to better handle extreme typos and complex semantic queries.

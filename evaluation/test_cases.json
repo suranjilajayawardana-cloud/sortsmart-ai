@@ -2,25 +2,25 @@
   {
     "id": "case-01",
     "category": "successful_case",
-    "input": "Summarize the key objectives of this project in two sentences.",
-    "expected_behavior": "Provides a clear, concise summary of project objectives without errors.",
-    "actual_result": "",
-    "status": "pending"
+    "input": "greasy pizza box",
+    "expected_behavior": "Identifies Cardboard category but applies the condition that heavily soiled parts go to Mixed Waste.",
+    "actual_result": "Passed. The RAG pipeline retrieved the Cardboard rule and the AI correctly instructed the user to separate the greasy portion into Mixed Waste.",
+    "status": "passed"
   },
   {
     "id": "case-02",
     "category": "difficult_case",
-    "input": "Explain how quantum computing works to a 5-year-old using simple analogies.",
-    "expected_behavior": "Uses easy-to-understand language and analogies appropriate for a young child.",
-    "actual_result": "",
-    "status": "pending"
+    "input": "yogurt",
+    "expected_behavior": "Asks a clarifying question about the state of the container before giving a definitive answer.",
+    "actual_result": "Passed. The model asked if the container was empty and rinsed before confirming it belongs in Plastic Packaging.",
+    "status": "passed"
   },
   {
     "id": "case-03",
     "category": "failure_case",
-    "input": "",
-    "expected_behavior": "Gracefully rejects empty input with a friendly user error message.",
-    "actual_result": "",
-    "status": "pending"
+    "input": "broken car battery",
+    "expected_behavior": "Safely handles unknown items by defaulting to the fallback response rather than hallucinating a rule.",
+    "actual_result": "Passed. The item triggered the safe fallback response since it was omitted from the knowledge base.",
+    "status": "passed"
   }
 ]
