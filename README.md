@@ -1,4 +1,4 @@
-# ♻️ SortSmart: An AI Recycling Guide
+# SortSmart: An AI Recycling Guide
 
 **Group Members:** Suranjila Jayawardana and Madhuni Kanchana  
 **Project Video Presentation:** [Insert your Unlisted YouTube or Google Drive link here]
@@ -19,19 +19,16 @@ Standard keyword searches fail when users describe items using synonyms, colloqu
 
 **Proposed Solution and Main Workflow:**
 
-SortSmart is a web application that helps users identify the correct waste category for a described item based strictly on a provided set of local sorting rules.
-
-The user types an item description into the interface (e.g., "empty plastic yoghurt cup with the foil lid attached").
+* SortSmart is a web application that helps users identify the correct waste category for a described item based strictly on a provided set of local sorting rules.
+* The user types an item description into the interface (e.g., "empty plastic yoghurt cup with the foil lid attached").
 The application retrieves the relevant local sorting guidelines from its knowledge base.
-
-The AI model analyzes the user's item against the retrieved rules.
-
-The application outputs the suggested waste category, a brief explanation citing the rule, and handles uncertain cases by asking for clarification (e.g., "Is the plastic cup rinsed?").
+* The AI model analyzes the user's item against the retrieved rules.
+* The application outputs the suggested waste category, a brief explanation citing the rule, and handles uncertain cases by asking for clarification (e.g., "Is the plastic cup rinsed?").
 
 **Initial Architecture:**
 The application strictly separates the UI from the AI logic, built upon the course's starter template.
 
-**User Interface: **Gradio web interface for input and displaying categorized results.
+**User Interface:** Gradio web interface for input and displaying categorized results.
 
 **Application Logic:** Python backend handling the RAG pipeline (document chunking and retrieval) and prompt formatting.
 
@@ -39,9 +36,8 @@ The application strictly separates the UI from the AI logic, built upon the cour
 
 **Planned Additional AI Capability and Justification:**
 
-Retrieval-Augmented Generation (RAG).
-LLMs are prone to hallucinating waste management rules or providing generic advice that violates local municipal guidelines. RAG is essential for this problem because it forces the model to ground its answers in a specific, provided dataset of local sorting rules. If a rule is not in the retrieval context, the model will be instructed to admit it does not know, ensuring high reliability and preventing authoritative but incorrect guidance.
+* Retrieval-Augmented Generation (RAG).
+* LLMs are prone to hallucinating waste management rules or providing generic advice that violates local municipal guidelines. RAG is essential for this problem because it forces the model to ground its answers in a specific, provided dataset of local sorting rules. If a rule is not in the retrieval context, the model will be instructed to admit it does not know, ensuring high reliability and preventing authoritative but incorrect guidance.
 
 **Planned Model and Runtime:**
-
 The application will use a lightweight local LLM (such as llama3.2 or mistral) running via Ollama. This ensures reproducible execution without relying on paid external APIs, fulfilling the course's reproducibility and secrecy requirements.
