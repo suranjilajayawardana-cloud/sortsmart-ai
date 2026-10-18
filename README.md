@@ -1,7 +1,7 @@
 # SortSmart: An AI Recycling Guide
 
 **Group Members:** Suranjila Jayawardana and Madhuni Kanchana  
-**Project Video Presentation:** [Insert your Unlisted YouTube or Google Drive link here]
+**Project Video Presentation:** --Video Link --
 
 ## Repository Navigation
 To assist with evaluation, our final documentation is located here:
