@@ -1,9 +1,13 @@
-**SortSmart: An AI Recycling Guide**
+# ♻️ SortSmart: An AI Recycling Guide
 
-**Group Members:**
+**Group Members:** Suranjila Jayawardana and Madhuni Kanchana  
+**Project Video Presentation:** [Insert your Unlisted YouTube or Google Drive link here]
 
-Suranjila Jayawardana 
-Madhuni Kanchana
+## Repository Navigation
+To assist with evaluation, our final documentation is located here:
+* **Final Architecture & Decisions:** [`docs/architecture.md`](docs/architecture.md) and [`docs/project-decisions.md`](docs/project-decisions.md)
+* **Evaluation & Test Cases:** [`evaluation/evaluation_results.md`](evaluation/evaluation_results.md)
+* **Source Code:** Main UI in `app/` and AI/RAG logic in `src/`
 
 **Intended Users and Problem:**
 
